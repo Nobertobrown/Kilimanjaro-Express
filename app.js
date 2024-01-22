@@ -1,10 +1,11 @@
 /******** imports and libraries *******/
-const path = require("path");
+// const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 /******** importing routes *******/
+const adminRoutes = require("./routes/admin")
 
 /********** initialization **********/
 const app = express();
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 
 // app.use("/catalogue", catalogueRoutes);
 // app.use(authRoutes);
-// app.use("/admin", adminRoutes);
+app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
