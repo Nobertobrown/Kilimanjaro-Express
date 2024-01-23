@@ -4,7 +4,6 @@ const { validationResult } = require("express-validator");
 const Admin = require("../models/Admin");
 const Bus = require("../models/Bus");
 const Route = require("../models/Route");
-require("dotenv").config();
 
 // Create admin
 exports.postSignup = (req, res, next) => {
@@ -37,7 +36,7 @@ exports.postSignup = (req, res, next) => {
     });
 };
 
-// TODO: Login as admin
+// Login as admin
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -80,7 +79,7 @@ exports.postLogin = (req, res, next) => {
     });
 };
 
-// TODO: Create a bus
+// Create a bus
 exports.postBus = (req, res, next) => {
   const busName = req.body.name;
   const plateNo = req.body.plate;
@@ -110,7 +109,7 @@ exports.postBus = (req, res, next) => {
     });
 };
 
-// TODO: Edit a bus
+// Edit a bus
 exports.putBus = (req, res, next) => {
   const id = req.params.busId;
   const busName = req.body.name;
@@ -140,14 +139,14 @@ exports.putBus = (req, res, next) => {
     });
 };
 
-// TODO: Delete a bus
+// Delete a bus
 exports.deleteBus = (req, res, next) => {
   const busId = req.params.busId;
 
   Bus.findById(busId)
     .then((bus) => {
-      if (!bus.routes.length == 0) {
-        const error = new Error("Delete all routes first!");
+      if (bus.routes.length !== 0) {
+        const error = new Error("All routes must be deleted first!");
         error.statusCode = 406;
         throw error;
       }
@@ -170,7 +169,7 @@ exports.deleteBus = (req, res, next) => {
     });
 };
 
-// TODO: Create a route
+// Create a route
 exports.postRoute = (req, res, next) => {
   const busId = req.params.busId;
   const name = req.body.name;
@@ -216,7 +215,7 @@ exports.postRoute = (req, res, next) => {
     });
 };
 
-// TODO: Edit a route
+// Edit a route
 exports.updateRoute = (req, res, next) => {
   const id = req.params.routeId;
   const busId = req.params.busId;
@@ -259,7 +258,7 @@ exports.updateRoute = (req, res, next) => {
     });
 };
 
-// TODO: Delete a route
+// Delete a route
 exports.deleteRoute = (req, res, next) => {
   const routeId = req.params.routeId;
   const busId = req.params.busId;
@@ -276,8 +275,8 @@ exports.deleteRoute = (req, res, next) => {
         error.statusCode = 406;
         throw error;
       }
-      if (!route.reservations.length == 0) {
-        const error = new Error("Delete all reservations first!");
+      if (route.reservations.length !== 0) {
+        const error = new Error("All reservations must be deleted first!");
         error.statusCode = 406;
         throw error;
       }
@@ -292,7 +291,7 @@ exports.deleteRoute = (req, res, next) => {
       return bus.save();
     })
     .then((_) => {
-      res.status(200).json({ message: "Deleted route." });
+      res.status(200).json({ message: "The route has been deleted!" });
     })
     .catch((err) => {
       if (!err.statusCode) {

@@ -9,7 +9,7 @@ const reservationSchema = new Schema(
       ref: "Route",
       required: true,
     },
-    Customers: [
+    customers: [
       {
         name: { type: String, required: true },
         gender: { type: String, required: true },

@@ -3,9 +3,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 /******** importing routes *******/
 const adminRoutes = require("./routes/admin")
+const userRoutes = require("./routes/user")
 
 /********** initialization **********/
 const app = express();
@@ -27,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 // app.use("/catalogue", catalogueRoutes);
-// app.use(authRoutes);
+app.use(userRoutes);
 app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
