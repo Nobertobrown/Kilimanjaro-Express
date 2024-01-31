@@ -1,0 +1,17 @@
+module.exports = {
+  // createTrip: require("./trip/createTrip"),
+  register: require("./admin/register"),
+  login: require("./admin/login"),
+  fetchLocations: require("./location/fetchLocations"),
+  postRoute: require("./route/createRoute"),
+  updateRoute: require("./route/updateRoute"),
+  fetchRoutes: require("./route/fetchRoutes"),
+  deleteRoute: require("./route/deleteRoute"),
+  postBus: require("./bus/createBus"),
+  putBus: require("./bus/updateBus"),
+  deleteBus: require("./bus/deleteBus"),
+  postReservation: require("./reservation/postReservation"),
+  deleteReservation: require("./reservation/deleteReservation"),
+  makeMobilePayment: require("./payment/makeMobilePayment"),
+  makeBankPayment: require("./payment/makeBankPayment"),
+};

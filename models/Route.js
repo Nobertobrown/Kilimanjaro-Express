@@ -13,7 +13,7 @@ const routeSchema = new Schema(
       type: String,
       required: true,
     },
-    beginning: {
+    origin: {
       type: String,
       required: true,
     },
@@ -28,6 +28,10 @@ const routeSchema = new Schema(
     time: {
       type: String,
       required: true,
+    },
+    duration:{
+      type : Number ,
+      required: true
     },
     cost: {
       type: String,

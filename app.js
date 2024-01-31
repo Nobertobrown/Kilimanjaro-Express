@@ -6,8 +6,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 /******** importing routes *******/
-const adminRoutes = require("./routes/admin")
-const userRoutes = require("./routes/user")
+const routes = require("./routes/routes")
 
 /********** initialization **********/
 const app = express();
@@ -29,20 +28,21 @@ app.use((req, res, next) => {
 });
 
 // app.use("/catalogue", catalogueRoutes);
-app.use(userRoutes);
-app.use("/admin", adminRoutes);
+app.use(routes);
 
 app.use((error, req, res, next) => {
   console.log(error);
   const statusCode = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
-  res.status(statusCode).json({ message: message, data: data, error: error });
+  res
+    .status(statusCode)
+    .json({ success: false, message: message, data: data, error: error });
 });
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/kilimanjaro")
-  .then((res) => {
+  .then((_) => {
     app.listen(8080, () => {
       console.log("Server started on port 8080");
     });
