@@ -7,6 +7,7 @@ module.exports = {
   updateRoute: require("./route/updateRoute"),
   fetchRoutes: require("./route/fetchRoutes"),
   deleteRoute: require("./route/deleteRoute"),
+  getBuses: require("./bus/fetchBuses"),
   postBus: require("./bus/createBus"),
   putBus: require("./bus/updateBus"),
   deleteBus: require("./bus/deleteBus"),

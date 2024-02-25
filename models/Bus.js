@@ -20,6 +20,8 @@ const busSchema = new Schema(
       type: String,
       required: true,
     },
+    amenities: Array,
+    categories: Array,
     routes: [
       {
         type: Schema.Types.ObjectId,

@@ -1,4 +1,4 @@
-const { Route } = require("../../models/Route");
+const  Route  = require("../../models/Route");
 
 const fetchRoutes = async (req, res, next) => {
   try {

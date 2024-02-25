@@ -6,12 +6,16 @@ const postBus = (req, res, next) => {
   const plateNo = req.body.plate;
   const seats = req.body.seats;
   const type = req.body.type;
+  const amenities = req.body.amenities;
+  const categories = req.body.categories;
 
   const bus = new Bus({
     name: busName,
     plateNo: plateNo,
     seats: seats,
     type: type,
+    amenities: amenities,
+    categories: categories,
   });
 
   bus

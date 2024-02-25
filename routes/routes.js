@@ -5,14 +5,15 @@ const {
   login,
   postRoute,
   fetchRoutes,
-  fetchLocations,
-  postBus,
   updateRoute,
   deleteRoute,
+  getBuses,
+  postBus,
   putBus,
   deleteBus,
   postReservation,
   deleteReservation,
+  fetchLocations,
   makeMobilePayment,
   makeBankPayment,
 } = require("../controllers/controllers");
@@ -22,17 +23,18 @@ const isAuth = require("../middlewares/isAuth");
 const router = express.Router();
 
 router.get("/location", fetchLocations);
-router.get("/route", fetchRoutes);
 router.route("/:routeId/reservation").post(postReservation);
 router.route("/:routeId/:reservationId/delete").delete(deleteReservation);
 router.route("/mobile-pay").post(makeMobilePayment);
 router.route("/bank-pay").post(makeBankPayment);
-router.route("/create-bus").post(isAuth, postBus);
-router.route("/:busId/edit").put(isAuth, putBus);
-router.route("/:busId/delete").delete(isAuth, deleteBus);
-router.route("/:busId/create-route").post(isAuth, postRoute);
-router.route("/:busId/:routeId/edit").put(isAuth, updateRoute);
-router.route("/:busId/:routeId/delete").delete(isAuth, deleteRoute);
+router.route("/create-bus").post( postBus);//isAuth,
+router.route("/buses").get( getBuses);//isAuth,
+router.route("/:busId/edit").put( putBus);//isAuth,
+router.route("/:busId/delete").delete( deleteBus);//isAuth,
+router.route("/:busId/create-route").post( postRoute);//isAuth,
+router.get("/route", fetchRoutes);
+router.route("/:busId/:routeId/edit").put( updateRoute);//isAuth,
+router.route("/:busId/:routeId/delete").delete( deleteRoute);//isAuth,
 
 router.route("/signup").post(
   [
