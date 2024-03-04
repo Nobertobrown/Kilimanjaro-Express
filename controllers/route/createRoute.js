@@ -1,8 +1,9 @@
 const Route = require("../../models/Route");
+const Bus = require("../../models/Bus")
 
 // Create a route
 const postRoute = (req, res, next) => {
-  const busId = req.params.busId;
+  const bus = req.params.busId;
   const name = req.body.name;
   const origin = req.body.origin;
   const destination = req.body.destination;
@@ -13,7 +14,7 @@ const postRoute = (req, res, next) => {
   let selectedBus;
 
   const route = new Route({
-    busId: busId,
+    bus: bus,
     name: name,
     origin: origin,
     destination: destination,
@@ -26,7 +27,7 @@ const postRoute = (req, res, next) => {
   route
     .save()
     .then((_) => {
-      return Bus.findById(busId);
+      return Bus.findById(bus);
     })
     .then((bus) => {
       selectedBus = bus;

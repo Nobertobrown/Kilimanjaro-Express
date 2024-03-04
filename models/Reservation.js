@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const reservationSchema = new Schema(
   {
-    routeId: {
+    route: {
       type: Schema.Types.ObjectId,
       ref: "Route",
       required: true,

@@ -32,7 +32,7 @@ router.route("/buses").get( getBuses);//isAuth,
 router.route("/:busId/edit").put( putBus);//isAuth,
 router.route("/:busId/delete").delete( deleteBus);//isAuth,
 router.route("/:busId/create-route").post( postRoute);//isAuth,
-router.get("/route", fetchRoutes);
+router.get("/routes", fetchRoutes);
 router.route("/:busId/:routeId/edit").put( updateRoute);//isAuth,
 router.route("/:busId/:routeId/delete").delete( deleteRoute);//isAuth,
 

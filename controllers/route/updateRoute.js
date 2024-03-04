@@ -3,7 +3,7 @@ const Route = require("../../models/Route");
 // Edit a route
 const updateRoute = (req, res, next) => {
   const id = req.params.routeId;
-  const busId = req.params.busId;
+  const bus = req.params.busId;
   const name = req.body.name;
   const beginning = req.body.beginning;
   const destination = req.body.destination;
@@ -18,7 +18,7 @@ const updateRoute = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      if (route.busId.toString() !== busId) {
+      if (route.bus.toString() !== bus) {
         const error = new Error("Not Acceptable!");
         error.statusCode = 406;
         throw error;

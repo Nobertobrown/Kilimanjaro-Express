@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const routeSchema = new Schema(
   {
-    busId: {
+    bus: {
       type: Schema.Types.ObjectId,
       ref: "Bus",
       required: true,
@@ -26,12 +26,19 @@ const routeSchema = new Schema(
       required: true,
     },
     time: {
+      type: Date,
+      required: true,
+      set: (value) => {
+        const [hours, minutes] = value.split(":").map(Number);
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        return date;
+      },
+    },
+    duration: {
       type: String,
       required: true,
-    },
-    duration:{
-      type : Number ,
-      required: true
     },
     cost: {
       type: String,

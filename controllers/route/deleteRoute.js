@@ -13,7 +13,7 @@ const deleteRoute = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      if (route.busId.toString() !== busId) {
+      if (route.bus.toString() !== busId) {
         const error = new Error("Not Acceptable!");
         error.statusCode = 406;
         throw error;

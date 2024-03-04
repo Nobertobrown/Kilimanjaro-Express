@@ -1,10 +1,10 @@
-const  Route  = require("../../models/Route");
+const Route = require("../../models/Route");
 
 const fetchRoutes = async (req, res, next) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = 50;
-    const skip = (page - 1) * limit;
+    const perPage = 50;
+    const skip = (page - 1) * perPage;
 
     const mainQuery = {};
 
@@ -17,10 +17,15 @@ const fetchRoutes = async (req, res, next) => {
       }
     }
 
-    const routes = await Route.find(mainQuery).skip(skip).limit(limit);
+    const routes = await Route.find(mainQuery)
+      .populate("bus", "name -_id")
+      .skip(skip)
+      .limit(perPage);
 
     if (routes.length === 0) {
-      return res.status(404).json({ success: false, error: "No routes found!" });
+      return res
+        .status(404)
+        .json({ success: false, error: "No routes found!" });
     }
 
     return res.status(200).json({ success: true, routes });

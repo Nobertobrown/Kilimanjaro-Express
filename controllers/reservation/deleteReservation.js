@@ -12,7 +12,7 @@ const deleteReservation = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
-      if (reservation.routeId.toString() !== routeId) {
+      if (reservation.route.toString() !== routeId) {
         const error = new Error("Not Acceptable!");
         error.statusCode = 406;
         throw error;

@@ -3,7 +3,7 @@ const Route = require("../../models/Route")
 
 // Make reservation
 const postReservation = (req, res, next) => {
-  const routeId = req.params.routeId;
+  const route = req.params.routeId;
   const customers = [...req.body.customers];
   const phoneNo = req.body.phoneNo;
   const email = req.body.email;
@@ -11,7 +11,7 @@ const postReservation = (req, res, next) => {
   let selectedRoute;
 
   const reservation = new Reservation({
-    routeId: routeId,
+    route: route,
     customers: customers,
     phoneNo: phoneNo,
     email: email,
@@ -21,7 +21,7 @@ const postReservation = (req, res, next) => {
   reservation
     .save()
     .then((_) => {
-      return Route.findById(routeId);
+      return Route.findById(route);
     })
     .then((route) => {
       selectedRoute = route;
