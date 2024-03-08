@@ -41,7 +41,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/kilimanjaro")
+  .connect(`${process.env.MONGODB_CONNECTION_STRING}`)
   .then((_) => {
     app.listen(process.env.PORT || 8080, () => {
       console.log(`Server started on port ${process.env.PORT}`);
