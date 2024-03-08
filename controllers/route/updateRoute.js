@@ -5,10 +5,12 @@ const updateRoute = (req, res, next) => {
   const id = req.params.routeId;
   const bus = req.params.busId;
   const name = req.body.name;
-  const beginning = req.body.beginning;
+  const origin = req.body.origin;
   const destination = req.body.destination;
-  const date = req.body.date;
-  const time = req.body.time;
+  const departureDate = req.body.departureDate;
+  const departureTime = req.body.departureTime;
+  const arrivalTime = req.body.arrivalTime;
+  const arrivalDate = req.body.arrivalDate;
   const cost = req.body.cost;
 
   Route.findById(id)
@@ -25,10 +27,12 @@ const updateRoute = (req, res, next) => {
       }
 
       route.name = name;
-      route.beginning = beginning;
+      route.origin = origin;
       route.destination = destination;
-      route.date = date;
-      route.time = time;
+      route.departureDate = departureDate;
+      route.departureTime = departureTime;
+      route.arrivalDate = arrivalDate;
+      route.arrivalTime = arrivalTime;
       route.cost = cost;
       return route.save();
     })

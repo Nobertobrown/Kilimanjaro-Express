@@ -1,8 +1,8 @@
 /******** imports and libraries *******/
-// const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const helmet = require("helmet")
 require("dotenv").config();
 
 /******** importing routes *******/
@@ -12,11 +12,12 @@ const routes = require("./routes/routes")
 const app = express();
 
 /******** defining middlewares *******/
+app.use(helmet())
 app.use(bodyParser.json());
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", `${process.env.ALLOWED_ORIGINS}`);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, PATCH, DELETE"
@@ -27,7 +28,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use("/catalogue", catalogueRoutes);
 app.use(routes);
 
 app.use((error, req, res, next) => {
@@ -43,8 +43,8 @@ app.use((error, req, res, next) => {
 mongoose
   .connect("mongodb://127.0.0.1:27017/kilimanjaro")
   .then((_) => {
-    app.listen(8080, () => {
-      console.log("Server started on port 8080");
+    app.listen(process.env.PORT || 8080, () => {
+      console.log(`Server started on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {

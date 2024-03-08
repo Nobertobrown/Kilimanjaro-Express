@@ -7,9 +7,10 @@ const postRoute = (req, res, next) => {
   const name = req.body.name;
   const origin = req.body.origin;
   const destination = req.body.destination;
-  const date = req.body.date;
-  const time = req.body.time;
-  const duration = req.body.duration;
+  const departureDate = req.body.departureDate;
+  const departureTime = req.body.departureTime;
+  const arrivalDate = req.body.arrivalDate;
+  const arrivalTime = req.body.arrivalTime;
   const cost = req.body.cost;
   let selectedBus;
 
@@ -18,9 +19,10 @@ const postRoute = (req, res, next) => {
     name: name,
     origin: origin,
     destination: destination,
-    date: date,
-    time: time,
-    duration: duration,
+    departureDate: departureDate,
+    departureTime: departureTime,
+    arrivalDate: arrivalDate,
+    arrivalTime: arrivalTime,
     cost: cost,
   });
 

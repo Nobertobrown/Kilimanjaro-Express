@@ -21,11 +21,15 @@ const routeSchema = new Schema(
       type: String,
       required: true,
     },
-    date: {
+    departureDate: {
       type: Date,
       required: true,
     },
-    time: {
+    arrivalDate: {
+      type: Date,
+      required: true,
+    },
+    departureTime: {
       type: Date,
       required: true,
       set: (value) => {
@@ -36,9 +40,16 @@ const routeSchema = new Schema(
         return date;
       },
     },
-    duration: {
-      type: String,
+    arrivalTime: {
+      type: Date,
       required: true,
+      set: (value) => {
+        const [hours, minutes] = value.split(":").map(Number);
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        return date;
+      },
     },
     cost: {
       type: String,
