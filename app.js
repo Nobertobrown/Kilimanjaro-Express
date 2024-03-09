@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet")
+const cors = require("cors")
 require("dotenv").config();
 
 /******** importing routes *******/
@@ -12,16 +13,20 @@ const routes = require("./routes/routes")
 const app = express();
 
 /******** defining middlewares *******/
+const options = {
+  origin: [
+    "http://localhost:5173",
+    "https://kilimanjaro-express.web.app",
+    "https://kilimanjaro-express.firebaseapp.com/",
+  ],
+};
+
+app.use(cors(options))
 app.use(helmet())
 app.use(bodyParser.json());
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", `${process.env.ALLOWED_ORIGINS}`);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE"
-  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   //   sets how the downloads should be handled, either displayed directly or prompting user to save
   //   res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
