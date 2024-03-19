@@ -13,7 +13,6 @@ const {
   deleteBus,
   postReservation,
   deleteReservation,
-  fetchLocations,
   makeMobilePayment,
   makeBankPayment,
 } = require("../controllers/controllers");
@@ -22,7 +21,6 @@ const isAuth = require("../middlewares/isAuth");
 
 const router = express.Router();
 
-router.get("/location", fetchLocations);
 router.route("/:routeId/reservation").post(postReservation);
 router.route("/:routeId/:reservationId/delete").delete(deleteReservation);
 router.route("/mobile-pay").post(makeMobilePayment);

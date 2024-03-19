@@ -2,27 +2,27 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const helmet = require("helmet")
-const cors = require("cors")
+const helmet = require("helmet");
+const cors = require("cors");
 require("dotenv").config();
 
 /******** importing routes *******/
-const routes = require("./routes/routes")
+const routes = require("./routes/routes");
 
 /********** initialization **********/
 const app = express();
 
 /******** defining middlewares *******/
-const options = {
-  origin: [
-    "http://localhost:5173",
-    "https://kilimanjaro-express.web.app",
-    "https://kilimanjaro-express.firebaseapp.com/",
-  ],
-};
+// const options = {
+//   origin: [
+//     "http://localhost:5173",
+//     "https://kilimanjaro-express.web.app",
+//     "https://kilimanjaro-express.firebaseapp.com/",
+//   ],
+// };
 
-app.use(cors(options))
-app.use(helmet())
+app.use(cors());//options
+app.use(helmet());
 app.use(bodyParser.json());
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
@@ -34,6 +34,11 @@ app.use((req, res, next) => {
 });
 
 app.use(routes);
+
+app.post("/callback", (req, res, next) => {
+  console.log("am in the callback!")
+  console.log(req)
+});
 
 app.use((error, req, res, next) => {
   console.log(error);
@@ -49,7 +54,7 @@ mongoose
   .connect(`${process.env.MONGODB_CONNECTION_STRING}`)
   .then((_) => {
     app.listen(process.env.PORT || 8080, () => {
-      console.log(`Server started on port ${process.env.PORT}`);
+      console.log(`Server started on port ${process.env.PORT || 8080}`);
     });
   })
   .catch((err) => {
