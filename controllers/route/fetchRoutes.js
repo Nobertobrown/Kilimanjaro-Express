@@ -40,7 +40,7 @@ const fetchRoutes = async (req, res, next) => {
     }
     
     const routes = await Route.find(mainQuery)
-      .populate("bus", "name amenities categories -_id") // Populate required fields
+      .populate("bus", "name seats amenities categories -_id") // Populate required fields
       .skip(skip)
       .limit(perPage);
 
