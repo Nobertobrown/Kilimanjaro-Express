@@ -4,12 +4,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const cors = require("cors");
-const helmet = require("helmet");
-const cors = require("cors");
 require("dotenv").config();
 
 /******** importing routes *******/
-const routes = require("./routes/routes");
 const routes = require("./routes/routes");
 
 /********** initialization **********/
@@ -37,11 +34,6 @@ app.use((req, res, next) => {
 });
 
 app.use(routes);
-
-app.post("/callback", (req, res, next) => {
-  console.log("am in the callback!")
-  console.log(req)
-});
 
 app.post("/callback", (req, res, next) => {
   console.log("am in the callback!")
