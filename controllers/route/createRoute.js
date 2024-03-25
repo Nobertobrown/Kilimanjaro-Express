@@ -1,5 +1,5 @@
 const Route = require("../../models/Route");
-const Bus = require("../../models/Bus")
+const Bus = require("../../models/Bus");
 
 // Create a route
 const postRoute = (req, res, next) => {
@@ -12,6 +12,7 @@ const postRoute = (req, res, next) => {
   const arrivalDate = req.body.arrivalDate;
   const arrivalTime = req.body.arrivalTime;
   const cost = req.body.cost;
+  let seatInfos;
   let selectedBus;
 
   const route = new Route({
@@ -26,13 +27,57 @@ const postRoute = (req, res, next) => {
     cost: cost,
   });
 
-  route
-    .save()
-    .then((_) => {
-      return Bus.findById(bus);
-    })
+  Bus.findById(bus)
     .then((bus) => {
       selectedBus = bus;
+      seatInfos = {
+        "1st": [...Array(Math.floor(bus.seats / 4))].map((_, i) => {
+          return {
+            seatNo: `${String.fromCharCode(65 + i)}3`,
+            isBooked: false,
+            isSelected: false,
+            price: cost,
+          };
+        }),
+        "2nd": [...Array(Math.floor(bus.seats / 4))].map((_, i) => {
+          return {
+            seatNo: `${String.fromCharCode(65 + i)}4`,
+            isBooked: false,
+            isSelected: false,
+            price: cost,
+          };
+        }),
+        "3rd": [
+          {
+            seatNo: `${String.fromCharCode(
+              65 + Math.floor(bus.seats / 4 - 1)
+            )}5`,
+            isBooked: false,
+            isSelected: false,
+            price: cost,
+          },
+        ],
+        "4th": [...Array(Math.floor(bus.seats / 4))].map((_, i) => {
+          return {
+            seatNo: `${String.fromCharCode(65 + i)}2`,
+            isBooked: false,
+            isSelected: false,
+            price: cost,
+          };
+        }),
+        "5th": [...Array(Math.floor(bus.seats / 4))].map((_, i) => {
+          return {
+            seatNo: `${String.fromCharCode(65 + i)}1`,
+            isBooked: false,
+            isSelected: false,
+            price: cost,
+          };
+        }),
+      };
+      route.seatInfos = seatInfos;
+      return route.save();
+    })
+    .then(() => {
       selectedBus.routes.push(route);
       return selectedBus.save();
     })

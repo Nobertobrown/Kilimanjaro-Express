@@ -55,6 +55,10 @@ const routeSchema = new Schema(
       type: String,
       required: true,
     },
+    seatInfos: {
+      type: Object,
+      required: true,
+    },
     reservations: [
       {
         type: Schema.Types.ObjectId,
