@@ -13,26 +13,26 @@ const {
   deleteBus,
   postReservation,
   deleteReservation,
-  makeMobilePayment,
-  makeBankPayment,
+  getPaymentPartners,
+  azampesaWebhook,
 } = require("../controllers/controllers");
 const Admin = require("../models/Admin");
 const isAuth = require("../middlewares/isAuth");
 
 const router = express.Router();
 
-router.route("/:routeId/reservation").post(postReservation);
+router.route("/reservation").post(postReservation);
 router.route("/:routeId/:reservationId/delete").delete(deleteReservation);
-router.route("/mobile-pay").post(makeMobilePayment);
-router.route("/bank-pay").post(makeBankPayment);
-router.route("/create-bus").post( postBus);//isAuth,
-router.route("/buses").get( getBuses);//isAuth,
-router.route("/:busId/edit").put( putBus);//isAuth,
-router.route("/:busId/delete").delete( deleteBus);//isAuth,
-router.route("/:busId/create-route").post( postRoute);//isAuth,
+router.route("/partners").get(getPaymentPartners);
+router.route("/create-bus").post(postBus); //isAuth,
+router.route("/buses").get(getBuses); //isAuth,
+router.route("/:busId/edit").put(putBus); //isAuth,
+router.route("/:busId/delete").delete(deleteBus); //isAuth,
+router.route("/:busId/create-route").post(postRoute); //isAuth,
 router.get("/routes", fetchRoutes);
-router.route("/:busId/:routeId/edit").put( updateRoute);//isAuth,
-router.route("/:busId/:routeId/delete").delete( deleteRoute);//isAuth,
+router.route("/:busId/:routeId/edit").put(updateRoute); //isAuth,
+router.route("/:busId/:routeId/delete").delete(deleteRoute); //isAuth,
+router.route("/callback").post(azampesaWebhook);
 
 router.route("/signup").post(
   [

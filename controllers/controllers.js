@@ -11,6 +11,6 @@ module.exports = {
   deleteBus: require("./bus/deleteBus"),
   postReservation: require("./reservation/postReservation"),
   deleteReservation: require("./reservation/deleteReservation"),
-  makeMobilePayment: require("./payment/makeMobilePayment"),
-  makeBankPayment: require("./payment/makeBankPayment"),
+  getPaymentPartners: require("./payment/getPaymentPartners"),
+  azampesaWebhook: require("./payment/callback"),
 };

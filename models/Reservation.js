@@ -13,21 +13,41 @@ const reservationSchema = new Schema(
       {
         name: { type: String, required: true },
         gender: { type: String, required: true },
-        seatNo: { type: Number, required: true },
-        category: { type: String }, // adult, child, student
+        seatNo: { type: String, required: true },
+        age: { type: String },
+        email: { type: String },
       },
     ],
     phoneNo: {
       type: String,
       required: true,
     },
-    email: {
+    fare: {
       type: String,
       required: true,
     },
-    pickup: {
+    // pickup: {
+    //   type: String,
+    //   required: true,
+    // },
+    // dropout: {
+    //   type: String,
+    //   required: true,
+    // },
+    status: {
+      type: String, //Paid, Incomplete, pending
+      required: true,
+      default: "pending",
+    },
+    transactionId: {
       type: String,
       required: true,
+    },
+    transactionInfo: {
+      type: Object,
+    },
+    description: {
+      type: String,
     },
   },
   { timestamps: true }

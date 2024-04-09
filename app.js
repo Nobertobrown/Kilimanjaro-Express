@@ -14,11 +14,7 @@ const app = express();
 
 /******** defining middlewares *******/
 // const options = {
-//   origin: [
-//     "http://localhost:5173",
-//     "https://kilimanjaro-express.web.app",
-//     "https://kilimanjaro-express.firebaseapp.com/",
-//   ],
+//   origin: process.env.ALLOWED_ORIGINS.split(" "),
 // };
 
 app.use(cors());//options
@@ -34,11 +30,6 @@ app.use((req, res, next) => {
 });
 
 app.use(routes);
-
-app.post("/callback", (req, res, next) => {
-  console.log("am in the callback!")
-  console.log(req)
-});
 
 app.use((error, req, res, next) => {
   console.log(error);
