@@ -2,6 +2,7 @@ const Reservation = require("../../models/Reservation");
 const sendSms = require("../ticket/sendTickets");
 
 const azamPesaWebhook = async (req, res, next) => {
+  console.log(req.body)
   try {
     const payload = req.body;
 

@@ -1,10 +1,10 @@
 /******** imports and libraries *******/
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const cors = require("cors");
-require("dotenv").config();
 
 /******** importing routes *******/
 const routes = require("./routes/routes");
