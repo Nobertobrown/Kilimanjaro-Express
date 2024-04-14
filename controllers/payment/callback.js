@@ -11,7 +11,8 @@ const azamPesaWebhook = async (req, res, next) => {
     const message = payload.message;
     const phoneNo = payload.msisdn;
 
-    // Find the reservation associated with the transactionId
+    // Find the reservation associated with the transactionId\
+    console.log("The transactionId",transactionId)
     const reservation = await Reservation.findOne({ transactionId: transactionId });
     console.log("Found reservation",reservation)
 
