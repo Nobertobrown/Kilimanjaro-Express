@@ -2,7 +2,6 @@ const Reservation = require("../../models/Reservation");
 const sendSms = require("../ticket/sendTickets");
 
 const azamPesaWebhook = async (req, res, next) => {
-  console.log(req.body)
   try {
     const payload = req.body;
 
@@ -14,6 +13,7 @@ const azamPesaWebhook = async (req, res, next) => {
 
     // Find the reservation associated with the transactionId
     const reservation = await Reservation.findOne({ transactionId: transactionId });
+    console.log("Found reservation",reservation)
 
     if (!reservation) {
       // Handle the case where the transaction is not found
@@ -26,12 +26,12 @@ const azamPesaWebhook = async (req, res, next) => {
       reservation.status = "paid";
       reservation.transactionInfo = payload;
       const res = await sendSms({phoneNo: phoneNo, msg: message})
-      console.log("SMS sent response", res)
+      console.log("SMS sent paid response", res)
     } else if (paymentStatus === "failed") {
-      // Update reservation status to 'payment_failed'
+      // Update reservation status to 'incomplete'
       reservation.status = "incomplete";
       const res = await sendSms({phoneNo: phoneNo, msg: message})
-      console.log("SMS sent response", res)
+      console.log("SMS sent incomplete response", res)
     }
 
     // Save the updated reservation
