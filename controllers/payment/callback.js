@@ -2,7 +2,7 @@ const Reservation = require("../../models/Reservation");
 const sendSms = require("../ticket/sendTickets");
 
 const maxRetries = 3; // Maximum number of retries
-const retryDelay = 1000; // Delay between retries in milliseconds (1 second in this example)
+const retryDelay = 60000;
 
 const azamPesaWebhook = async (req, res, next) => {
   try {
@@ -51,7 +51,7 @@ const azamPesaWebhook = async (req, res, next) => {
       reservation.transactionInfo = payload;
       const res = await sendSms({ phoneNo: phoneNo, msg: message });
       console.log("SMS sent paid response", res);
-    } else if (paymentStatus === "failed") {
+    } else if (paymentStatus === "failure") {
       // Update reservation status to 'incomplete'
       reservation.status = "incomplete";
       const res = await sendSms({ phoneNo: phoneNo, msg: message });
