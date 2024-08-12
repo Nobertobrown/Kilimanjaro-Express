@@ -13,4 +13,5 @@ module.exports = {
   deleteReservation: require("./reservation/deleteReservation"),
   getPaymentPartners: require("./payment/getPaymentPartners"),
   azampesaWebhook: require("./payment/callback"),
+  getReservations: require("./reservation/fetchReservaions"),
 };

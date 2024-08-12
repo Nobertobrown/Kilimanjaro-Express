@@ -15,13 +15,14 @@ const {
   deleteReservation,
   getPaymentPartners,
   azampesaWebhook,
+  getReservations,
 } = require("../controllers/controllers");
 const Admin = require("../models/Admin");
 const isAuth = require("../middlewares/isAuth");
 
 const router = express.Router();
 
-router.route("/reservation").post(postReservation);
+router.route("/booking").post(postReservation).get(getReservations);
 router.route("/:routeId/:reservationId/delete").delete(deleteReservation);
 router.route("/partners").get(getPaymentPartners);
 router.route("/create-bus").post(postBus); //isAuth,

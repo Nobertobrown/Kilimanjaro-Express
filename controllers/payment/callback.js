@@ -42,7 +42,6 @@ const azamPesaWebhook = async (req, res, next) => {
 
     // Find the reservation associated with the transactionId
     const reservation = await findReservationWithRetry(maxRetries);
-    console.log("Found reservation", reservation);
 
     // Update reservation status based on payment status
     if (paymentStatus === "success") {
@@ -50,12 +49,10 @@ const azamPesaWebhook = async (req, res, next) => {
       reservation.status = "paid";
       reservation.transactionInfo = payload;
       const res = await sendSms({ phoneNo: phoneNo, msg: message });
-      console.log("SMS sent paid response", res);
     } else if (paymentStatus === "failure") {
       // Update reservation status to 'incomplete'
       reservation.status = "incomplete";
       const res = await sendSms({ phoneNo: phoneNo, msg: message });
-      console.log("SMS sent incomplete response", res);
     }
 
     // Save the updated reservation
