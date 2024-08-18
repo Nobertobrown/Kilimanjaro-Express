@@ -34,7 +34,10 @@ const postLogin = (req, res, next) => {
       );
       res.status(200).json({
         token: token,
-        adminId: authenticatedAdmin._id.toString(),
+        username: authenticatedAdmin.username,
+        uid: authenticatedAdmin._id.toString(),
+        email: authenticatedAdmin.email,
+        success: true,
       });
     })
     .catch((err) => {

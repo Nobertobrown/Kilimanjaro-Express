@@ -11,12 +11,14 @@ const postSignup = (req, res, next) => {
     error.data = errors.array();
     throw error;
   }
+  const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
   bcrypt
     .hash(password, 12)
     .then((hashedPw) => {
       const admin = new Admin({
+        username: username,
         email: email,
         password: hashedPw,
       });
