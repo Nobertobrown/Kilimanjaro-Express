@@ -1,7 +1,6 @@
 /******** imports and libraries *******/
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -19,7 +18,7 @@ const app = express();
 
 app.use(cors());//options
 app.use(helmet());
-app.use(bodyParser.json());
+app.use(express.json());
 // app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
